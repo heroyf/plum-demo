@@ -8,7 +8,11 @@ const stopped = ref(false)
 const MAX_LEN = 600
 let depth = 0
 let pendingTasks: Function[] = []
-const controls = useRafFn(frame, { immediate: false })
+const framesCount = 0
+const controls = useRafFn(() => {
+  if (framesCount % 3 === 0)
+    frame()
+}, { immediate: false })
 interface Branch {
   start: Point
   length: number
@@ -33,17 +37,6 @@ function frame() {
   }
   tasks.forEach(fn => fn())
 }
-// let framesCount = 0
-// function startFrame() {
-//   requestAnimationFrame(() => {
-//     framesCount += 1
-//     if (framesCount % 3 === 0)
-//       frame()
-//     startFrame()
-//   })
-// }
-
-// startFrame()
 
 function lineTo(p1: Point, p2: Point) {
   ctx.beginPath()
