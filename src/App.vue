@@ -59,7 +59,7 @@ onMounted(async () => {
   const step = (b: Branch) => {
     const end = getEndPoint(b)
     drawBranch(b)
-
+    // 小于init的时候，100%会生成新的分支
     if (depth < init.value || Math.random() < 0.5) {
       pendingTasks.push(() => step({
         start: end,
@@ -104,7 +104,7 @@ onMounted(async () => {
       <div text-gray-400>
         init
       </div>
-      <div text-gray-500 bold px-2 @click="init = init % 8 + 1">
+      <div text-gray-500 bold px-2 cursor-pointer @click="init = init % 8 + 1">
         {{ init }}
       </div>
     </div>
@@ -112,7 +112,7 @@ onMounted(async () => {
       <div text-gray-400>
         len
       </div>
-      <div text-gray-500 bold px-2 @click="len = len % 10 + 1">
+      <div text-gray-500 bold px-2 cursor-pointer @click="len = len % 10 + 1">
         {{ len }}
       </div>
     </div>
